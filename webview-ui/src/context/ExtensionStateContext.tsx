@@ -110,6 +110,8 @@ export interface ExtensionStateContextType extends ExtensionState {
 
 export const ExtensionStateContext = createContext<ExtensionStateContextType | undefined>(undefined)
 
+import i18n from "../i18n";
+
 export const ExtensionStateContextProvider: React.FC<{
 	children: React.ReactNode
 }> = ({ children }) => {
@@ -233,6 +235,17 @@ export const ExtensionStateContextProvider: React.FC<{
 		multiRootSetting: { user: false, featureFlag: false },
 		hooksEnabled: { user: false, featureFlag: false },
 	})
+
+	useEffect(() => {
+		if (state.preferredLanguage) {
+			const languageMap: { [key: string]: string } = {
+				"English": "en",
+				"Vietnamese - Tiếng Việt": "vi",
+			};
+			const langCode = languageMap[state.preferredLanguage] || "en";
+			i18n.changeLanguage(langCode);
+		}
+	}, [state.preferredLanguage]);
 	const [expandTaskHeader, setExpandTaskHeader] = useState(true)
 	const [didHydrateState, setDidHydrateState] = useState(false)
 	const [showWelcome, setShowWelcome] = useState(false)

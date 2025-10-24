@@ -88,6 +88,10 @@ export class PromptBuilder {
 			return ""
 		}
 
+		if (this.context.preferredLanguage === "Vietnamese - Tiếng Việt") {
+			prompt += "\n\nPlease respond in Vietnamese.";
+		}
+
 		// Combine multiple regex operations for better performance
 		return prompt
 			.replace(/\n\s*\n\s*\n/g, "\n\n") // Remove multiple consecutive empty lines

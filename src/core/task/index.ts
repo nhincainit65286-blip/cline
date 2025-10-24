@@ -1821,6 +1821,7 @@ export class Task {
 			workspaceRoots,
 			isSubagentsEnabledAndCliInstalled,
 			isCliSubagent,
+			preferredLanguage: preferredLanguageRaw,
 		}
 
 		const systemPrompt = await getSystemPrompt(promptContext)

@@ -319,6 +319,8 @@ export async function activate(context: vscode.ExtensionContext) {
 			await explainWithCline(context.controller, context.commandContext)
 		}),
 	)
+import { generateDocsWithCline } from "./core/controller/commands/generateDocsWithCline";
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand(commands.ImproveCode, async (range: vscode.Range) => {
 			const context = await getContextForCommand(range)
@@ -326,6 +328,16 @@ export async function activate(context: vscode.ExtensionContext) {
 				return
 			}
 			await improveWithCline(context.controller, context.commandContext)
+		}),
+	)
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand(commands.GenerateDocs, async (range: vscode.Range) => {
+			const context = await getContextForCommand(range)
+			if (!context) {
+				return
+			}
+			await generateDocsWithCline(context.controller, context.commandContext)
 		}),
 	)
 

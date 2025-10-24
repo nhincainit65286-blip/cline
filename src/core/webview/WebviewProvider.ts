@@ -115,6 +115,7 @@ export abstract class WebviewProvider {
 					style-src ${this.getCspSource()} 'unsafe-inline'; 
 					img-src ${this.getCspSource()} https: data:; 
 					script-src 'nonce-${nonce}' 'unsafe-eval';">
+				<script nonce="${nonce}">window.language = "${vscode.env.language}";</script>
 				<title>Cline</title>
 			</head>
 			<body>

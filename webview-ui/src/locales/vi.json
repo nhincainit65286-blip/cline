@@ -1,0 +1,20 @@
+{
+  "greeting": "Chào bạn!",
+  "welcome.title": "Chào bạn, tôi là Cline",
+  "welcome.description": "Tôi có thể thực hiện tất cả các loại nhiệm vụ nhờ những đột phá trong khả năng lập trình của Claude 4 Sonnet và quyền truy cập vào các công cụ cho phép tôi tạo và chỉnh sửa tệp, khám phá các dự án phức tạp, sử dụng trình duyệt và thực thi các lệnh đầu cuối <i>(tất nhiên là với sự cho phép của bạn)</i>. Tôi thậm chí có thể sử dụng MCP để tạo các công cụ mới và mở rộng khả năng của riêng mình.",
+  "welcome.signup_prompt": "Đăng ký tài khoản để bắt đầu miễn phí hoặc sử dụng khóa API cung cấp quyền truy cập vào các mô hình như Claude Sonnet.",
+  "welcome.get_started_button": "Bắt đầu miễn phí",
+  "welcome.use_api_key_button": "Sử dụng khóa API của riêng bạn",
+  "welcome.lets_go_button": "Đi nào!",
+  "settings.tabs.api_configuration": "Cấu hình API",
+  "settings.tabs.features": "Tính năng",
+  "settings.tabs.browser": "Trình duyệt",
+  "settings.tabs.terminal": "Terminal",
+  "settings.tabs.debug": "Gỡ lỗi",
+  "settings.tabs.general": "Chung",
+  "settings.tabs.about": "Về Cline",
+  "settings.done_button": "Hoàn tất",
+  "settings.title": "Cài đặt",
+  "settings.general.preferred_language.label": "Ngôn ngữ ưu tiên",
+  "settings.general.preferred_language.description": "Ngôn ngữ mà Cline nên sử dụng để giao tiếp."
+}

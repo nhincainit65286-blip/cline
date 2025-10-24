@@ -1,0 +1,20 @@
+{
+  "greeting": "Hello, World!",
+  "welcome.title": "Hi, I'm Cline",
+  "welcome.description": "I can do all kinds of tasks thanks to breakthroughs in Claude 4 Sonnet's agentic coding capabilities and access to tools that let me create & edit files, explore complex projects, use a browser, and execute terminal commands <i>(with your permission, of course)</i>. I can even use MCP to create new tools and extend my own capabilities.",
+  "welcome.signup_prompt": "Sign up for an account to get started for free, or use an API key that provides access to models like Claude Sonnet.",
+  "welcome.get_started_button": "Get Started for Free",
+  "welcome.use_api_key_button": "Use your own API key",
+  "welcome.lets_go_button": "Let's go!",
+  "settings.tabs.api_configuration": "API Configuration",
+  "settings.tabs.features": "Features",
+  "settings.tabs.browser": "Browser",
+  "settings.tabs.terminal": "Terminal",
+  "settings.tabs.debug": "Debug",
+  "settings.tabs.general": "General",
+  "settings.tabs.about": "About",
+  "settings.done_button": "Done",
+  "settings.title": "Settings",
+  "settings.general.preferred_language.label": "Preferred Language",
+  "settings.general.preferred_language.description": "The language that Cline should use for communication."
+}

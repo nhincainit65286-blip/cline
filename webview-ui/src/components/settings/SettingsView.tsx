@@ -39,6 +39,8 @@ const settingsTabTrigger =
 const settingsTabTriggerActive =
 	"opacity-100 border-l-2 border-l-[var(--vscode-focusBorder)] border-t-0 border-r-0 border-b-0 bg-[var(--vscode-list-activeSelectionBackground)]"
 
+import { useTranslation } from "react-i18next";
+
 // Tab definitions
 interface SettingsTab {
 	id: string
@@ -49,56 +51,56 @@ interface SettingsTab {
 	hidden?: boolean
 }
 
-export const SETTINGS_TABS: SettingsTab[] = [
+export const getSettingsTabs = (t: (key: string) => string): SettingsTab[] => [
 	{
 		id: "api-config",
-		name: "API Configuration",
-		tooltipText: "API Configuration",
-		headerText: "API Configuration",
+		name: t("settings.tabs.api_configuration"),
+		tooltipText: t("settings.tabs.api_configuration"),
+		headerText: t("settings.tabs.api_configuration"),
 		icon: SlidersHorizontal,
 	},
 	{
 		id: "features",
-		name: "Features",
-		tooltipText: "Feature Settings",
-		headerText: "Feature Settings",
+		name: t("settings.tabs.features"),
+		tooltipText: t("settings.tabs.features"),
+		headerText: t("settings.tabs.features"),
 		icon: CheckCheck,
 	},
 	{
 		id: "browser",
-		name: "Browser",
-		tooltipText: "Browser Settings",
-		headerText: "Browser Settings",
+		name: t("settings.tabs.browser"),
+		tooltipText: t("settings.tabs.browser"),
+		headerText: t("settings.tabs.browser"),
 		icon: SquareMousePointer,
 	},
 	{
 		id: "terminal",
-		name: "Terminal",
-		tooltipText: "Terminal Settings",
-		headerText: "Terminal Settings",
+		name: t("settings.tabs.terminal"),
+		tooltipText: t("settings.tabs.terminal"),
+		headerText: t("settings.tabs.terminal"),
 		icon: SquareTerminal,
 	},
 	// Only show in dev mode
 	{
 		id: "debug",
-		name: "Debug",
-		tooltipText: "Debug Tools",
-		headerText: "Debug",
+		name: t("settings.tabs.debug"),
+		tooltipText: t("settings.tabs.debug"),
+		headerText: t("settings.tabs.debug"),
 		icon: FlaskConical,
 		hidden: !IS_DEV,
 	},
 	{
 		id: "general",
-		name: "General",
-		tooltipText: "General Settings",
-		headerText: "General Settings",
+		name: t("settings.tabs.general"),
+		tooltipText: t("settings.tabs.general"),
+		headerText: t("settings.tabs.general"),
 		icon: Wrench,
 	},
 	{
 		id: "about",
-		name: "About",
-		tooltipText: "About Cline",
-		headerText: "About",
+		name: t("settings.tabs.about"),
+		tooltipText: t("settings.tabs.about"),
+		headerText: t("settings.tabs.about"),
 		icon: Info,
 	},
 ]
@@ -109,8 +111,8 @@ type SettingsViewProps = {
 }
 
 // Helper to render section header - moved outside component for better performance
-const renderSectionHeader = (tabId: string) => {
-	const tab = SETTINGS_TABS.find((t) => t.id === tabId)
+const renderSectionHeader = (tabId: string, t: (key: string) => string) => {
+	const tab = getSettingsTabs(t).find((t) => t.id === tabId)
 	if (!tab) {
 		return null
 	}
@@ -126,6 +128,9 @@ const renderSectionHeader = (tabId: string) => {
 }
 
 const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
+	const { t } = useTranslation();
+	const SETTINGS_TABS = getSettingsTabs(t);
+
 	// Memoize to avoid recreation
 	const TAB_CONTENT_MAP = useMemo(
 		() => ({
@@ -143,7 +148,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 	const { version, environment } = useExtensionState()
 
 	// Initialize active tab with memoized calculation
-	const initialTab = useMemo(() => targetSection || SETTINGS_TABS[0].id, [targetSection])
+	const initialTab = useMemo(() => targetSection || SETTINGS_TABS[0].id, [targetSection, SETTINGS_TABS])
 
 	const [activeTab, setActiveTab] = useState<string>(initialTab)
 	const [isCompactMode, setIsCompactMode] = useState(true)
@@ -187,7 +192,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 				element.style.backgroundColor = "transparent"
 			}, 1200)
 		})
-	}, [])
+	}, [SETTINGS_TABS])
 
 	useEvent("message", handleMessage)
 
@@ -286,7 +291,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 		}
 
 		// Special props for specific components
-		const props: any = { renderSectionHeader }
+		const props: any = { renderSectionHeader: (tabId: string) => renderSectionHeader(tabId, t) }
 		if (activeTab === "debug") {
 			props.onResetState = handleResetState
 		} else if (activeTab === "about") {
@@ -294,7 +299,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 		}
 
 		return <Component {...props} />
-	}, [activeTab, handleResetState, version])
+	}, [activeTab, handleResetState, version, t])
 
 	const titleColor = getEnvironmentColor(environment)
 
@@ -303,11 +308,11 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 			<TabHeader className="flex justify-between items-center gap-2">
 				<div className="flex items-center gap-1">
 					<h3 className="m-0" style={{ color: titleColor }}>
-						Settings
+						{t("settings.title")}
 					</h3>
 				</div>
 				<div className="flex gap-2">
-					<VSCodeButton onClick={onDone}>Done</VSCodeButton>
+					<VSCodeButton onClick={onDone}>{t("settings.done_button")}</VSCodeButton>
 				</div>
 			</TabHeader>
 

@@ -3,7 +3,10 @@ import React from "react"
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { updateSetting } from "./utils/settingsHandlers"
 
+import { useTranslation } from "react-i18next";
+
 const PreferredLanguageSetting: React.FC = () => {
+	const { t } = useTranslation();
 	const { preferredLanguage } = useExtensionState()
 
 	const handleLanguageChange = (newLanguage: string) => {
@@ -13,7 +16,7 @@ const PreferredLanguageSetting: React.FC = () => {
 	return (
 		<div style={{}}>
 			<label className="block mb-1 text-sm font-medium" htmlFor="preferred-language-dropdown">
-				Preferred Language
+				{t("settings.general.preferred_language.label")}
 			</label>
 			<VSCodeDropdown
 				currentValue={preferredLanguage || "English"}
@@ -31,7 +34,7 @@ const PreferredLanguageSetting: React.FC = () => {
 				<VSCodeOption value="Hindi - हिन्दी">Hindi - हिन्दी</VSCodeOption>
 				<VSCodeOption value="Hungarian - Magyar">Hungarian - Magyar</VSCodeOption>
 				<VSCodeOption value="Italian - Italiano">Italian - Italiano</VSCodeOption>
-				<VSCodeOption value="Japanese - 日本語">Japanese - 日本語</VSCodeOption>
+				<VSCodeOption value="Japanese - 日本語">Japanese - 日本語</VSCodeCodeOption>
 				<VSCodeOption value="Korean - 한국어">Korean - 한국어</VSCodeOption>
 				<VSCodeOption value="Polish - Polski">Polish - Polski</VSCodeOption>
 				<VSCodeOption value="Portuguese - Português (Portugal)">Portuguese - Português (Portugal)</VSCodeOption>
@@ -40,12 +43,11 @@ const PreferredLanguageSetting: React.FC = () => {
 				<VSCodeOption value="Spanish - Español">Spanish - Español</VSCodeOption>
 				<VSCodeOption value="Traditional Chinese - 繁體中文">Traditional Chinese - 繁體中文</VSCodeOption>
 				<VSCodeOption value="Turkish - Türkçe">Turkish - Türkçe</VSCodeOption>
+				<VSCodeOption value="Vietnamese - Tiếng Việt">Vietnamese - Tiếng Việt</VSCodeOption>
 			</VSCodeDropdown>
 			<p className="text-xs text-[var(--vscode-descriptionForeground)] mt-1">
-				The language that Cline should use for communication.
+				{t("settings.general.preferred_language.description")}
 			</p>
 		</div>
 	)
 }
-
-export default React.memo(PreferredLanguageSetting)
